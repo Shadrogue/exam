@@ -1,0 +1,60 @@
+input[type=date] {
+    cursor: pointer !important;
+}
+
+input[type=date]::-webkit-clear-button,
+input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-outer-spin-button {
+    display: none;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator { 
+    color: transparent; 
+    cursor: pointer !important;
+    background: url(/images/calendar.svg) no-repeat center;
+    background-size: contain;
+    opacity: 1;
+}
+
+.dropdown-menu {
+    padding: 15px;
+    font-size: 20px;
+    color: #fff !important;
+    background-color: #1b0707 !important;
+    transition: 0.2s;
+}
+
+.prev,
+.next {
+    transition: 0.2s;
+}
+
+.prev:hover,
+.next:hover {
+    color: #e26f11 !important;
+}
+
+.datepicker-switch {
+    transition: 0.2s !important;
+}
+
+.datepicker-switch:hover {
+    color: #000 !important;
+}
+
+.dow {
+    padding: 5px 5px;
+    color: #e26f11 !important;
+}
+
+.day:hover {
+    color: #000 !important;
+}
+
+.datepicker table tr td.active {
+    background-color: #676a6e !important;
+}
+
+.datepicker-dropdown:after {
+    display: none;
+}

@@ -1,0 +1,539 @@
+﻿<!doctype HTML>
+<html>
+
+<head>
+    <title>Административная панель</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="styles/font-awesome.all.min.css">
+    <link rel="stylesheet" href="styles/bootstrap/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="styles/bootstrap/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="styles/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/bootstrap/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/admin.css"> 
+    <link rel="stylesheet" href="styles/datepicker.css">
+</head>
+
+<body>
+    <header class="page-header" id="home">
+        <div class="page-header__body">
+            <nav class="page-header__nav header navbar navbar-dark navbar-expand-lg">
+                <div class="container">
+                    <h1 class="admin__title">Административная панель</h1>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
+                        aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="page-header__menu collapse navbar-collapse" id="navbarsExample07">
+                        <ul class="page-header__list list navbar-nav ml-auto">
+                            <li class="list__item nav-item active">
+                                <a class="list__link nav-link" href="index.html">
+                                    Сайт <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main class="admin">
+        <div id="SuccessAlert" class="alert alert-success alert-dismissible fade show d-none" role="alert">
+            <div id="FoodProviderDeletedSuccessfullyAlert" class="d-none">
+                Предприятие общественного питания
+                успешно удалено.
+            </div>
+            <div id="FoodProviderCreatedSuccessfullyAlert" class="d-none">
+                Предприятие общественного питания
+                успешно создано.
+            </div>
+            <div id="FoodProviderUpdatedSuccessfullyAlert" class="d-none">
+                Предприятие общественного питания
+                успешно обновлено.
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div id="ErrorAlert" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+            <div id="FoodProvidersAdministrationUnavailableAlert" class="d-none">
+                Сервис администрирования предприятий общественного питания
+                временно не доступен. Пожалуйста, попробуйте выполнить операцию позднее.
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="viewer modal fade" id="ViewModal" tabindex="-1" role="dialog" aria-labelledby="ViewModalLabel"
+            aria-hidden="true">
+            <div class="viewer__body popup-content modal-dialog" role="document">
+                <div class="modal-content popup-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title title-popup" id="ViewModalLabel"></h2>
+                        <button type="button" class="viewer__close close btn-hover" data-dismiss="modal"
+                            aria-label="Close">
+                            <i class="close__popup close__icon far fa-times-circle"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="viewer__list">
+                            <div class="viewer__content d-md-flex justify-content-md-between align-items-center">
+                                <div class="viewer__item">
+                                    <span class="viewer__text mini-subtitle">Наименование:</span>
+                                </div>
+                                <div class="viewer__item">
+                                    <span class="viewer__value viewer__name"></span>
+                                </div>
+                            </div>
+                            <div class="viewer__content d-md-flex justify-content-md-between align-items-center">
+                                <div class="viewer__item">
+                                    <span class="viewer__text mini-subtitle">Является сетевым:</span>
+                                </div>
+                                <div class="viewer__item">
+                                    <span class="viewer__value viewer__network"></span>
+                                </div>
+                            </div>
+                            <div class="viewer__content d-md-flex justify-content-md-between align-items-center">
+                                <div class="viewer__item">
+                                    <span class="viewer__text mini-subtitle">Название управляющей компании:</span>
+                                </div>
+                                <div class="viewer__item">
+                                    <span class="viewer__value viewer__operating-company"></span>
+                                </div>
+                            </div>
+                            <div class="viewer__content d-md-flex justify-content-md-between align-items-center">
+                                <div class="viewer__item">
+                                    <span class="viewer__text mini-subtitle">Вид объекта:</span>
+                                </div>
+                                <div class="viewer__item">
+                                    <span class="viewer__value viewer__type"></span>
+                                </div>
+                            </div>
+                            <div class="viewer__content d-md-flex justify-content-md-between align-items-center">
+                                <div class="viewer__item">
+                                    <span class="viewer__text mini-subtitle">Административный округ:</span>
+                                </div>
+                                <div class="viewer__item">
+                                    <span class="viewer__value viewer__area"></span>
+                                </div>
+                            </div>
+                            <div class="viewer__content d-md-flex justify-content-md-between align-items-center">
+                                <div class="viewer__item">
+                                    <span class="viewer__text mini-subtitle">Район:</span>
+                                </div>
+                                <div class="viewer__item">
+                                    <span class="viewer__value viewer__district"></span>
+                                </div>
+                            </div>
+                            <div class="viewer__content d-md-flex justify-content-md-between align-items-center">
+                                <div class="viewer__item">
+                                    <span class="viewer__text mini-subtitle">Адрес:</span>
+                                </div>
+                                <div class="viewer__item">
+                                    <span class="viewer__value viewer__address"></span>
+                                </div>
+                            </div>
+                            <div class="viewer__content d-md-flex justify-content-md-between align-items-center">
+                                <div class="viewer__item">
+                                    <span class="viewer__text mini-subtitle">Число посадочных мест:</span>
+                                </div>
+                                <div class="viewer__item">
+                                    <span class="viewer__value viewer__seats-count"></span>
+                                </div>
+                            </div>
+                            <div class="viewer__content d-md-flex justify-content-md-between align-items-center">
+                                <div class="viewer__item">
+                                    <span class="viewer__text mini-subtitle">Социальные льготы:</span>
+                                </div>
+                                <div class="viewer__item">
+                                    <span class="viewer__value viewer__social-privileges"></span>
+                                </div>
+                            </div>
+                            <div class="viewer__content d-md-flex justify-content-md-between align-items-center">
+                                <div class="viewer__item">
+                                    <span class="viewer__text mini-subtitle">Контактный телефон:</span>
+                                </div>
+                                <div class="viewer__item">
+                                    <span class="viewer__value viewer__phone"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-bt footer-modal-btn btn-hover" data-dismiss="modal">Ок</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-list-editor  modal fade" id="EditModal" tabindex="-1" role="dialog"
+            aria-labelledby="EditModalLabel" aria-hidden="true">
+            <div class="admin-list-editor__body popup-content modal-dialog" role="document">
+                <div class="modal-content popup-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title title-popup grow-end" id="EditModalLabel">
+                            <span class="modal-title__edit-title d-none">Редактирование записи</span>
+                            <span class="modal-title__creation-title d-none">Добавление записи</span>
+                        </h2>
+                        <button type="button" class="viewer__close close btn-hover" data-dismiss="modal"
+                            aria-label="Close">
+                            <i class="close__popup close__icon far fa-times-circle"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="EditForm">
+                            <div class="admin-list-editor__list row">
+                                <div class="admin-list-editor__item col-md-12">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Наименование</h3>
+                                        <input name="name" class="admin-list-editor__value admin-list-editor__name input-modal" type="text">
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-12">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Адрес</h3>
+                                        <input name="address" class="admin-list-editor__value admin-list-editor__address input-modal" type="text">
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-6">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Посадочные места</h3>
+                                        <input name="seatsCount" class="admin-list-editor__value admin-list-editor__seats-count input-modal"
+                                            type="text" value="0">
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-6">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Управляющая компания</h3>
+                                        <input name="operatingCompany" class="admin-list-editor__value admin-list-editor__operating-company input-modal"
+                                            type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="admin-list-editor__list row">
+                                <div class="admin-list-editor__item col-md-6">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Административный округ</h3>
+                                        <select id="AreaEditOptions" name="admArea" class="select-list admin-list-editor__area">
+                                            <option>Не выбрано</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-6">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Район</h3>
+                                        <select id="DistrictEditOptions" name="district" class="select-list admin-list-editor__district">
+                                            <option>Не выбрано</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-6">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Тип</h3>
+                                        <select id="TypeEditOptions" name="typeObject" class="select-list admin-list-editor__type">
+                                            <option>Не выбрано</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-6">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Социальные льготы</h3>
+                                        <select name="socialPrivileges" class="select-list admin-list-editor__social-privileges">
+                                            <option value="1">Есть</option>
+                                            <option value="0">Нет</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-6">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Является сетевым</h3>
+                                        <select name="isNetObject" class="select-list admin-list-editor__network">
+                                            <option value="1">Да</option>
+                                            <option value="0">Нет</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-6">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Телефон</h3>
+                                        <input name="publicPhone"
+                                            class="admin-list-editor__value admin-list-editor__phone input-modal input-medium bfh-phone"
+                                            type="text"
+                                            data-format="+7 (ddd) ddd-dddd">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="admin-list-editor__list row">
+                                <div class="admin-list-editor__item col-md-2">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Цена блюда 1</h3>
+                                        <input id="MenuItem1PriceField" name="set_1" class="admin-list-editor__value input-modal" type="text" value="0">
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-2">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Цена блюда 2</h3>
+                                        <input id="MenuItem2PriceField" name="set_2" class="admin-list-editor__value input-modal" type="text" value="0">
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-2">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Цена блюда 3</h3>
+                                        <input id="MenuItem3PriceField" name="set_3" class="admin-list-editor__value input-modal" type="text" value="0">
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-2">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Цена блюда 4</h3>
+                                        <input id="MenuItem4PriceField" name="set_4" class="admin-list-editor__value input-modal" type="text" value="0">
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-2">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Цена блюда 5</h3>
+                                        <input id="MenuItem5PriceField" name="set_5" class="admin-list-editor__value input-modal" type="text" value="0">
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-2">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Цена блюда 6</h3>
+                                        <input id="MenuItem6PriceField" name="set_6" class="admin-list-editor__value input-modal" type="text" value="0">
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-2">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Цена блюда 7</h3>
+                                        <input id="MenuItem7PriceField" name="set_7" class="admin-list-editor__value input-modal" type="text" value="0">
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-2">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Цена блюда 8</h3>
+                                        <input id="MenuItem8PriceField" name="set_8" class="admin-list-editor__value input-modal" type="text" value="0">
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-2">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Цена блюда 9</h3>
+                                        <input id="MenuItem9PriceField" name="set_9" class="admin-list-editor__value input-modal" type="text" value="0">
+                                    </div>
+                                </div>
+                                <div class="admin-list-editor__item col-md-2">
+                                    <div class="grow">
+                                        <h3 class="admin-list-editor__subtitle grow-end">Цена блюда 10</h3>
+                                        <input id="MenuItem10PriceField" name="set_10" class="admin-list-editor__value input-modal" type="text" value="0">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-bt btn-hover footer-modal-btn" data-dismiss="modal">
+                            Отмена
+                        </button>
+                        <button id="EditFormSubmitButtion" type="button" class="btn-bt btn-hover footer-modal-btn"
+                            data-dismiss="modal">
+                            Подтвердить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="del-event modal fade" id="DeleteModal" tabindex="-1" role="dialog"
+            aria-labelledby="DeleteModalLabel" aria-hidden="true">
+            <div class="del-event__body">
+                <div class="modal-dialog popup-content" role="document">
+                    <div class="modal-content popup-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title title-popup" id="DeleteModalLabel">Удаление записи</h2>
+                            <button type="button" class="close btn-hover" data-dismiss="modal" aria-label="Close">
+                                <i class="close__popup close__icon far fa-times-circle"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body m__text">
+                            <span class="del-event__text">Вы уверены, что хотите удалить данные предприятия <span
+                                    class="del-event__food-provider-name">(название предприятия)</span>?</span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn-bt btn-hover footer-modal-btn"
+                                data-dismiss="modal">Нет</button>
+                            <button id="FoodProviderDeleteButton" type="button"
+                                class="btn-bt btn-hover footer-modal-btn" data-dismiss="modal">Да</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container create">
+            <div class="create__body">
+                <h2 class="create__title section-title text-center">Предприятия общественного питания города Москвы</h2>
+                <div class="container create__editor">
+                    <div class="create__list row">
+                        <div class="create__item col-lg-12">
+                            <h3 class="create__subtitle">Наименование</h3>
+                            <input id="NamePattern" class="create__input page-input" placeholder="Макдональдс">
+                        </div>
+                    </div>
+                    <div class="create__list row">
+                        <div class="create__item col-lg-6">
+                            <h3 class="create__subtitle">Количество посадочных мест</h3>
+                            <input id="MinimumSeatsCount" class="create__input page-input" placeholder="0">
+                            <p>до</p>
+                            <input id="MaximumSeatsCount" class="create__input page-input" placeholder="100">
+                        </div>
+                        <div class="create__item col-lg-6">
+                            <h3 class="create__subtitle">Дата создания</h3>
+                            <input type="date" id="MinimumCreationDate" class="create__input page-input">
+                            <p>до</p>
+                            <input type="date" id="MaximumCreationDate" class="create__input page-input">
+                        </div>
+                    </div>
+                    <div class="create__list row">
+                        <div class="create__item col-lg-6">
+                            <div class="grow">
+                                <h3 class="create__subtitle grow-end">Административный округ</h3>
+                                <select id="AreaSearchOptions" class="select-list">
+                                    <option>Любой</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="create__item col-lg-6">
+                            <div class="grow">
+                                <h3 class="create__subtitle grow-end">Район</h3>
+                                <select id="DistrictSearchOptions" class="select-list">
+                                    <option>Любой</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="create__list row">
+                        <div class="create__item col-lg-6">
+                            <div class="grow">
+                                <h3 class="create__subtitle grow-end">Вид объекта</h3>
+                                <select id="TypeSearchOptions" class="select-list">
+                                    <option>Любой</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="create__item col-lg-6">
+                            <div class="grow">
+                                <h3 class="create__subtitle grow-end">Соц. скидки</h3>
+                                <select class="select-list" id="SocialPrivilegesSearchOptions">
+                                    <option>Не выбрано</option>
+                                    <option>Есть</option>
+                                    <option>Нет</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="create__item col-lg-6">
+                            <div class="grow">
+                                <h3 class="create__subtitle grow-end">Является сетевым</h3>
+                                <select class="select-list" id="NetworkSearchOptions">
+                                    <option>Не выбрано</option>
+                                    <option>Да</option>
+                                    <option>Нет</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <input id="SearchButton" class="choice__btn-value btn-bt btn-hover text-uppercase" type="submit"
+                        value="найти">
+                </div>
+                <div class="container table decor-line">
+                    <div id="FoodProviders" class="table__body row d-none">
+                        <table class="table__list">
+                            <thead class="table__item head-t">
+                                <tr>
+                                    <td>Название</td>
+                                    <td>Тип</td>
+                                    <td>Адрес</td>
+                                    <td>Действия</td>
+                                </tr>
+                            </thead>
+                            <tbody class="table__item body-t">
+                                <tr id="FoodProviderItemTemplate" class="table__item d-none">
+                                    <td class="food-provider__name"></td>
+                                    <td class="food-provider__type"></td>
+                                    <td class="food-provider__address"></td>
+                                    <td class="d-flex table-border-none">
+                                        <button type="button"
+                                            class="btn-bt admin-table-btn admin-table-btn-view d-flex justify-content-center btn-hover"
+                                            data-toggle="modal" data-target="#ViewModal" title="Просмотреть">
+                                            <i class="far fa-sticky-note"></i>
+                                        </button>
+                                        <button type="button"
+                                            class="btn-bt admin-table-btn admin-table-btn-edit d-flex justify-content-center btn-hover"
+                                            data-toggle="modal" data-target="#EditModal" title="Редактировать">
+                                            <i class="far fa-edit"></i>
+                                        </button>
+                                        <button type="button"
+                                            class="btn-bt admin-table-btn admin-table-btn-delete d-flex justify-content-center btn-hover"
+                                            data-toggle="modal" data-target="#DeleteModal" title="Удалить">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="food-providers d-flex justify-content-between align-items-center flex-wrap">
+                            <nav id="FoodProvidersPagination" class="main-switching switching"
+                                aria-label="Page navigation example"></nav>
+                            <div class="add-event">
+                                <button id="CreateFoodProviderButton" type="button"
+                                    class="btn-bt add-event-btn btn-hover footer-modal-btn" data-toggle="modal"
+                                    data-target="#EditModal">
+                                    Добавить предприятие
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="FoodProvidersUnavailableMessage" class="row d-none">
+                        <div class="col-lg-12 text-center">
+                            <div class="alert alert-danger" role="alert">
+                                Предприятия общественного питания недоступны.
+                            </div>
+                        </div>
+                    </div>
+                    <div id="FoodProvidersNotFoundMessage" class="row d-none">
+                        <div class="col-lg-12 text-center">
+                            <div class="alert alert-primary" role="alert">
+                                Предприятия общественного питания с указанным параметрам не найдены. Попробуйте поменять
+                                параментры фильтра и повторите поиск.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer" id="contacts">
+        <div class="container contact">
+            <h2 class="company company__title">Департамент торговли и услуг города Москвы</h2>
+            <div class="contact__list row align-items-center">
+                <div class="contact__item col-lg-4 align-items-center">
+                    <a class="contact__link" href=""><i class="contact__icon fas fa-envelope"></i>emai.com</a>
+                </div>
+                <div class="contact__item col-lg-4 align-items-center">
+                    <a class="contact__link" href=""><i class="contact__icon fas fa-envelope"></i>food.ru</a>
+                </div>
+                <div class="contact__item col-lg-4 align-items-center row justify-content-center">
+                    <a class="contact__link" href="#"><i class="fab fa-facebook-square"></i></a>
+                    <a class="contact__link" href="#"><i class="fab fa-twitter-square"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/jquery/jquery-3.5.1.slim.min.js"></script>
+    <script src="scripts/jquery/jquery.bootpag.min.js"></script>
+    <script src="scripts/bootstrap/bootstrap.min.js"></script>
+    <script src="scripts/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="scripts/bootstrap/bootstrap-datepicker.min.js"></script>
+    <script src="scripts/bootstrap/bootstrap-datepicker.ru.min.js"></script>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/constants.js"></script>
+    <script src="scripts/admin.js"></script>
+</body>
+
+</html>

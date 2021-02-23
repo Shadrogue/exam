@@ -1,0 +1,119 @@
+.create__body {
+    padding: 100px 0 0 0;
+}
+
+.admin__title {
+    position: relative;
+    font-size: 32px;
+    color: #fff;
+}
+
+.create__editor {
+    min-height: 300px;
+    background-color: #ec971a;
+    border: 1px solid #676a6e;
+}
+
+.create__form {
+    margin: 30px;
+}
+
+.create__item {
+    margin: 10px 0;
+}
+
+.create__input {
+    width: 100%;
+}
+
+.create__subtitle {
+    flex-grow: 1;
+    font-size: 24px;
+    color: #09071f;
+}
+
+.admin-table-btn {
+    width: 50px;
+    padding: 15px;
+    margin: 0 5px;
+}
+
+.admin-table-btn:first-child:hover {
+    color: #e26f11;
+}
+
+.admin-table-btn:hover {
+    color: #008000;
+}
+
+.admin-table-btn:last-child:hover {
+    color: rgb(170, 35, 35);
+}
+
+.add-event {
+    margin: 0;
+}
+
+.add-event-btn {
+    padding: 10px;
+    color: #e26f11;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    transition: 0.1s;
+}
+
+.admin-switching {
+    width: 100%;
+}
+
+.admin-switching__list {
+    margin: 30px 0 20px 5px;
+}
+
+.admin-switching__link {
+    padding: 10px 15px;
+}
+
+.admin-list-editor__item {
+    margin: 10px 0;
+}
+
+.admin-list-editor__subtitle {
+    flex-grow: 1;
+    font-size: 20px;
+}
+
+.admin-list-editor__value {
+    width: 100%;
+}
+
+.admin-form__btn-value {
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    font-size: 22px;
+    font-weight: bold;
+    color: #e26f11 !important;
+    background-color: #171a1f;
+    box-shadow: 1px 1px 11px 1px rgba(0, 0, 0, 0.38);
+}
+
+.admin-form__btn-value:active {
+    box-shadow: none;
+    transform: translateY(5px);
+}
+
+.del-event__body {
+    margin: 30vh 0;
+}
+
+@media (max-width: 768px) {
+    .admin__title {
+        font-size: 22px;
+    }
+
+    .create__input {
+        width: 100%;
+    }
+}
